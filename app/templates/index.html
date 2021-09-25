@@ -1,1 +1,116 @@
-<h1> Hello World </h1>
+{% extends 'base.html' %}
+    <body>
+    {% block content %}
+<div class="container-fluid">
+    <div  style="background-color: inherit; background-attachment: fixed; height: 100%; padding-top: 130px;" class="row">
+        
+        <div class="col-md-2">
+        
+        </div>
+        <div class="col-md-8">
+        <div style ="" class="row">
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="{{url_for('static',filename='image/')}}" alt="">
+                    <div class="overlay">
+                        <h2>Food</h2>
+                        <a class="info" href="{{ url_for('main.food') }}"> Blogs </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="https://i0.wp.com/www.comicmix.com//wp-content/uploads/2016/12/moana-fallback_fde4d101.jpeg?resize=350%2C200" alt="">
+                    <div class="overlay">
+                        <h2>Movies</h2>
+                        <a class="info" href="{{ url_for('main.movie') }}">Blogs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="https://divinghalkidiki.files.wordpress.com/2016/12/slide-01.jpg?w=350&h=200&crop=1" alt="">
+                    <div class="overlay">
+                        <h2>Travel</h2>
+                        <a class="info" href="{{ url_for('main.travel') }}">Blogs</a>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <br>
+        </br>
+        <div style="" class="row">
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="https://i0.wp.com/blackyouthproject.com/wp-content/uploads/2016/07/Zendaya.jpg?fit=640%2C480&resize=350%2C200" alt="">
+                    <div class="overlay">
+                        <h2>Celebrities</h2>
+                        <a class="info" href="{{ url_for('main.celebrities') }}"> Blogs </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="https://ugecviewpoints.files.wordpress.com/2016/06/shutterstock_243805252.jpg?w=350&h=200&crop=1" alt="">
+                    <div class="overlay">
+                        <h2>fitness</h2>
+                        <a class="info" href="{{ url_for('main.fitness') }}">Blogs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="http://www.afronline.org/wp-content/uploads/2013/11/Rwanda-AfricanFashion.jpg" alt="">
+                    <div class="overlay">
+                        <h2>Fashion</h2>
+                        <a class="info" href="{{ url_for('main.fashion') }}">Blogs</a>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <br>
+        </br>
+        <div style="" class="row">
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="https://i1.wp.com/www.lotuswritings.nl/wp-content/uploads/2016/01/shutterstock_342763031.jpg?fit=800%2C534&ssl=1&resize=350%2C200" alt="">
+                    <div class="overlay">
+                        <h2>Personal</h2>
+                        <a class="info" href="{{ url_for('main.personal') }}"> Blogs </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="https://i2.wp.com/trueredusa.com/wp-content/uploads/2018/09/65806/cardi-b-nicki-minaj.jpg?fit=1200%2C630&resize=350%2C200" alt="">
+                    <div class="overlay">
+                        <h2>Music</h2>
+                        <a class="info" href="{{ url_for('main.music') }}">Blogs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hovereffect">
+                    <img class="img-responsive" src="https://i1.wp.com/www.carvisionnews.com/wp-content/uploads/2013/08/cvr-11-20-12-fine-form-lamborghinis-aventador.jpg?fit=775%2C465&resize=350%2C200" alt="">
+                    <div class="overlay">
+                        <h2>sports</h2>
+                        <a class="info" href="{{ url_for('main.sports') }}">Blogs</a>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+         
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+
+    
+</div> 
+<p style="text-align: center; font-family: 'Courgette', cursive;"> &copy; Copyright Lewis Mutuma </p> 
+{% endblock  %}
+    </body>
