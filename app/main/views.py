@@ -15,7 +15,7 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    title = 'Home-PITCHperfect'
+    title = 'Home-BLOGmaster'
     #review by category
     blogs_fashion = Blog.get_blogs('fashion')
     blogs_food = Blog.get_blogs('food')
