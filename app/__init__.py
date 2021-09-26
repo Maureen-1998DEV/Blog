@@ -24,7 +24,7 @@ def create_app(config_name):
 
     app.config.from_object(config_options[config_name])
     app.config["UPLOADED_PHOTOS_DEST"] = "static/img"
-    app.config['SECRET_KEY'] = 'thisIsarandomkey'
+    app.config['SECRET_KEY'] = 'maureenrandomkey'
     mail.init_app(app)
     # configure UploadSet
     configure_uploads(app,photos)

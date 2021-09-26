@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, SelectField
 
-class blogForm(FlaskForm):
+class BlogForm(FlaskForm):
 
     title = StringField('Blog title')
     category= SelectField('Blog Category', choices=[('Select a category', 'Select a category'),('Music', 'Music'),('celebrites', 'celebriries'),('movie', 'movie'),('Fashion', 'Fashion'),('Travel', 'Travel'),('Food', 'Food'),('Personal', 'Personal'),('Fitness', 'Fitness'),('sports', 'sports')])
@@ -11,7 +11,7 @@ class blogForm(FlaskForm):
 
 class CommentForm(FlaskForm):
 
-    comment = TextAreaField('Post Of The Comment')
+    comment = TextAreaField(' Comment blog')
     submit = SubmitField('Submit')
 
 
