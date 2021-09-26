@@ -1,0 +1,2 @@
+Hello {{user.username}}
+Welcome to BLOGmaster ,welcome to this amaizing website that allows youto share blogs and receive comments about it.We officially welcome you to our family.
