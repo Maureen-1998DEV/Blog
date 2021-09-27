@@ -1,4 +1,4 @@
-from flask import render_template,request,redirect,url_for,abort,flash
+from flask import render_template,request,redirect,url_for,abort
 from .import main
 from ..models import Blog,User,Comment
 from .forms import UpdateProfile,BlogForm,CommentForm
@@ -15,20 +15,18 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    title = 'Home-BLOGmaster'
+    title = 'Home-PITCHperfect'
     #review by category
     blogs_fashion = Blog.get_blogs('fashion')
-    blogs_food = Blog.get_blogs('food')
-    blogs_travel = Blog.get_blogs('travel')
-    blogs_music = Blog.get_blogs('music')
-    blogs_movie = Blog.get_blogs('movie')
-    blogs_personal = Blog.get_blogs('personal')
-    blogs_sports = Blog.get_blogs('sports')  
     blogs_celebrity = Blog.get_blogs('celebrity')
+    blogs_travel = Blog.get_blogs('travel')
     blogs_fitness = Blog.get_blogs('fitness')
-    
-    
-    return render_template('index.html',title = title, fashion =blogs_fashion , food = blogs_food, travel = blogs_travel,music = blogs_music, movie = blogs_movie,personal = blogs_personal, sports= blogs_sports,celebrities =  blogs_celebrity,fitness = blogs_fitness)
+    blogs_food = Blog.get_blogs('food')
+    blogs_movie = Blog.get_blogs('movie')
+    blogs_music = Blog.get_blogs('music')
+    blogs_personal = Blog.get_blogs('personal')
+    blogs_sports = Blog.get_blogs('sports')
+    return render_template('index.html',title = title, fashion =blogs_fashion,celebrity =blogs_celebrity, fitness =blogs_fitness,movie =blogs_movie,music =blogs_music,food =blogs_food,travel =blogs_travel,personal =blogs_personal,sports =blogs_sports)
 
 
 @main.route('/user/<uname>')
@@ -74,75 +72,32 @@ def update_pic(uname):
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
 
-@main.route('/blog/new', methods = ['GET','POST'])
+@main.route('/pitch/new', methods = ['GET','POST'])
 @login_required
 def new_blog():
     blog_form = BlogForm()
     if blog_form.validate_on_submit():
-        title_blog = blog_form.title.data
-        content_blog= blog_form.text.data
+        title = blog_form.title.data
+        blog = blog_form.text.data
         category = blog_form.category.data
 
         # Updated blog
-        new_blog = Blog(title_blog=title_blog,content_blog=content_blog,category=category,user=current_user,likes=0,dislikes=0)
+        new_blog = Blog(title_blog=title,content_blog=blog,category=category,user=current_user,likes=0,dislikes=0)
 
         # Save blog
         new_blog.save_blog()
-        return redirect(url_for('main.index'))
+        return redirect(url_for('.index'))
 
-    title = 'New Blog'
+    title = 'New blog'
     return render_template('new_blog.html',title = title,blog_form=blog_form )
 
+
 @main.route('/blogs/blogs_fashion')
-def blog_fashion():
+def blogs_fashion():
 
     blogs = Blog.get_blogs('fashion')
 
-    return render_template("fashion.html", blogs = blogs)
-
-
-@main.route('/blogs/blogs_food')
-def blogs_food():
-
-    blogs = Blog.get_blogs('food')
-
-    return render_template("food.html", blogs = blogs)
-
-@main.route('/blogs/blogs_travel/new')
-def blogs_travel():
-
-    blogs = Blog.get_blogs('travel')
-
-    return render_template("travel.html", blogs = blogs)
-
-
-@main.route('/blogs/blogs_music')
-def blogs_music():
-
-    blogs = Blog.get_blogs('music')
-
-    return render_template("music.html", blogs = blogs)
-
-
-@main.route('/blogs/blogs_movie')
-def blogs_movie():
-
-    blogs = Blog.get_blogs('movie')
-
-    return render_template("movie.html", blogs = blogs)
-
-@main.route('/blogs/blogs_personal')
-def blogs_personal():
-
-    blogs = Blog.get_blogs('personal')
-
-    return render_template("personal.html", blogs = blogs)
-@main.route('/blogs/blogs_sports')
-def blogs_sports():
-
-    blogs = Blog.get_blogs('sports')
-
-    return render_template("sports.html", blogs = blogs)
+    return render_template("fashion.html", blogs=blogs)
 
 
 @main.route('/blogs/blogs_celebrity')
@@ -150,19 +105,65 @@ def blogs_celebrity():
 
     blogs = Blog.get_blogs('celebrity')
 
-    return render_template("celebrities.html", blogs = blogs)
+    return render_template("celebrity.html", blogs=blogs)
+
 
 @main.route('/blogs/blogs_fitness')
 def blogs_fitness():
 
     blogs = Blog.get_blogs('fitness')
 
-    return render_template("fitness.html", blogs = blogs)
+    return render_template("fitness.html", blogs=blogs)
 
+@main.route('/blogs/blogs_food')
+def blogs_food():
+
+    blogs = Blog.get_blogs('food')
+
+    return render_template("food.html", blogs=blogs)
+
+
+@main.route('/blogs/blogs_movie')
+def blogs_movie():
+
+    blogs = Blog.get_blogs('movie')
+
+    return render_template("movie.html", blogs=blogs)
+
+
+@main.route('/blogs/blogs_music')
+def blogs_music():
+
+    blogs = Blog.get_blogs('music')
+
+    return render_template("music.html", blogs=blogs)
+
+@main.route('/blogs/blogs_personal')
+def blogs_personal():
+
+    blogs = Blog.get_blogs('personal')
+
+    return render_template("personal.html", blogs=blogs)
+
+
+@main.route('/blogs/blogs_sports')
+def blogs_sports():
+
+    blogs = Blog.get_blogs('sports')
+
+    return render_template("sports.html", blogs=blogs)
+
+
+@main.route('/blogs/blogs_travel')
+def blogs_travel():
+
+    blogs = Blog.get_blogs('travel')
+
+    return render_template("travel.html", blogs=blogs)
 
 @main.route('/blog/<int:id>', methods = ['GET','POST'])
 def blog(id):
-    blog = Blog.get_blogs(id)
+    blog = Blog.get_blog(id)
     posted_date = blog.posted.strftime('%b %d, %Y')
 
     if request.args.get("like"):
@@ -198,7 +199,7 @@ def blog(id):
 def user_blogs(uname):
     user = User.query.filter_by(username=uname).first()
     blogs = Blog.query.filter_by(user_id = user.id).all()
-    blogs_count = Blog.count_blogs(uname)
+    blogs_count = Blog.count_pitches(uname)
     user_joined = user.date_joined.strftime('%b %d, %Y')
 
-    return render_template("profile/blogs.html", user=user,blogs = blogs,blogs_count=blogs_count,date = user_joined)
+    return render_template("profile/blogs.html", user=user,blogs=blogs,blogs_count=blogs_count,date = user_joined)
