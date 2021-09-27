@@ -76,25 +76,22 @@ def update_pic(uname):
 
 @main.route('/blog/new', methods = ['GET','POST'])
 @login_required
-def  new_blog():
+def new_blog():
     blog_form = BlogForm()
-
     if blog_form.validate_on_submit():
+        title_blog = blog_form.title.data
+        content_blog= blog_form.text.data
+        category = blog_form.category.data
 
-        title=blog_form.title.data
-        content=blog_form.text.data
-        category=blog_form.category.data
-        blog = Blog( title_blog=title, content_blog=content,category=category)
-        # blog.save_blog(blog)
-        db.session.add(blog)
-        db.session.commit()
+        # Updated blog
+        new_blog = Blog(title_blog=title_blog,content_blog=content_blog,category=category,user=current_user,likes=0,dislikes=0)
 
-        flash('Your post has been created!', 'success')
-        return redirect(url_for('main.index', id=blog.id))
+        # Save blog
+        new_blog.save_blog()
+        return redirect(url_for('main.index'))
 
     title = 'New Blog'
-    return render_template('new_blog.html',title = 'New Blog',blog_form=blog_form )
-
+    return render_template('new_blog.html',title = title,blog_form=blog_form )
 
 @main.route('/blogs/blogs_fashion')
 def blog_fashion():
@@ -111,7 +108,7 @@ def blogs_food():
 
     return render_template("food.html", blogs = blogs)
 
-@main.route('/blogs/blogs_travel')
+@main.route('/blogs/blogs_travel/new')
 def blogs_travel():
 
     blogs = Blog.get_blogs('travel')
@@ -165,7 +162,7 @@ def blogs_fitness():
 
 @main.route('/blog/<int:id>', methods = ['GET','POST'])
 def blog(id):
-    blogs = Blog.get_blogs(id)
+    blog = Blog.get_blogs(id)
     posted_date = blog.posted.strftime('%b %d, %Y')
 
     if request.args.get("like"):
@@ -197,11 +194,11 @@ def blog(id):
 
     return render_template("blog.html", blog = blog, comment_form = comment_form, comments = comments, date = posted_date)
 
-@main.route('/user/<uname>/pitches')
+@main.route('/user/<uname>/blogs')
 def user_blogs(uname):
     user = User.query.filter_by(username=uname).first()
     blogs = Blog.query.filter_by(user_id = user.id).all()
     blogs_count = Blog.count_blogs(uname)
     user_joined = user.date_joined.strftime('%b %d, %Y')
 
-    return render_template("profile/blog.html", user=user,blogs = blogs,blogs_count=blogs_count,date = user_joined)
+    return render_template("profile/blogs.html", user=user,blogs = blogs,blogs_count=blogs_count,date = user_joined)

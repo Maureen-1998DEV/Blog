@@ -1,17 +1,14 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 
-{% block content %}
-<div class="container-fluid">
-    <div  style=" padding-bottom: 130px; padding-top: 130px;" class="row">
-        <div class= "col-md-2"class="mx-auto" style="width: 500px;"></div> 
-            <a href="{{ url_for('main.new_blog') }}"><button type="button" class="btn btn-primary btn-lg " class="mx-auto" style="width:200px">Post a bolg</button>
-            </a>
-        
-        <div class= "col-md-10">
-            {{macro.displayblogs(blogs)}}
-        </div> 
-                
+{%block content%}
+
+<div class="container">
+    <h1 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Fashion Blog</h1>
+    <hr>
+    <div class="row">
+        {{macro.displayBlog(blog)}}
+    </div>
 </div>
+{%endblock%}
 <p style="text-align: center; font-family: 'Courgette', cursive;"> &copy; Copyright Maureen Ougo </p>
-{% endblock%}
