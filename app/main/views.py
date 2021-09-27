@@ -1,4 +1,4 @@
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,request,redirect,url_for,abort,flash
 from .import main
 from ..models import Blog,User,Comment
 from .forms import UpdateProfile,BlogForm,CommentForm
@@ -76,22 +76,24 @@ def update_pic(uname):
 
 @main.route('/blog/new', methods = ['GET','POST'])
 @login_required
-def new_blog():
+def  new_blog():
     blog_form = BlogForm()
+
     if blog_form.validate_on_submit():
-        title = blog_form.title.data
-        blog = blog_form.text.data
-        category = blog_form.category.data
 
-        # Updated blog 
-        new_blog = Blog(title_blog=title,content_blog=blog,category=category,user=current_user,likes=0,dislikes=0)
+        title=blog_form.title.data
+        content=blog_form.text.data
+        category=blog_form.category.data
+        blog = Blog( title_blog=title, content_blog=content,category=category)
+        # blog.save_blog(blog)
+        db.session.add(blog)
+        db.session.commit()
 
-        # Save blog 
-        new_blog.save_blog()
-        return redirect(url_for('.index'))
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('main.index', id=blog.id))
 
     title = 'New Blog'
-    return render_template('new_blog.html',title = title,blog_form=blog_form )
+    return render_template('new_blog.html',title = 'New Blog',blog_form=blog_form )
 
 
 @main.route('/blogs/blogs_fashion')
