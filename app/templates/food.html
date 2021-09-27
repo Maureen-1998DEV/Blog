@@ -1,43 +1,16 @@
 {% extends 'base.html'%}
-{% import 'bootstrap/wtf.html' as wtf%}
+{% import 'macros.html' as macro %}
 
 {% block content %}
 <div class="container-fluid">
     <div  style=" padding-bottom: 130px; padding-top: 130px;" class="row">
-        <div class= "col-md-2">
-            <a href="{{ url_for('main.new_blog') }}"><button style="color: black;" class="btn btn-outline-info btn-sm">Post a blog</button></a>
+        <div class= "col-md-2"class="mx-auto" style="width: 500px;"> 
+            <a href="{{ url_for('main.new_blog') }}"><button type="button" class="btn btn-primary btn-lg " class="mx-auto" style="width:200px">Post a bolg</button>
+            </a>
         </div>
-        <div class= "col-md-8">
-            <h3 style="font-family: 'Courgette', cursive;">{{ title}}</h3>
-            {% for food in foods %} 
-                    <div style="background-color:#b3d7ef;" class="card">
-                        <article class="media content-section">
-                            <div class="card-title">
-                                <div class="article-metadata">
-                                
-                                </div>
-                                <div class="card-body">
-                                <small> {{ food.posted_on }}</small>
-                                <h4>Category: {{ food.category }}</h4>
-                                <small> {{ food.title }} </small>
-                                
-                                <p> {{ food.content }}</p>
-                                
-                                <br>
-                                
-                                </div>
-                                
-                            </div>
-                        </article>
-                    </div>   
-                {% endfor %}            
+        <div class= "col-md-10">
+            {{macro.displayblogs(blogs)}}
         </div>
-        <div class= "col-md-2">
-        
-        </div>
-    
-
-    </div>       
 </div>
-<p style="text-align: center; font-family: 'Courgette', cursive;"> &copy; Copyright Lewis Mutuma </p>
+<p style="text-align: center; font-family: 'Courgette', cursive;"> &copy; Copyright Maureen Ougo </p>
 {% endblock%}

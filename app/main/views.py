@@ -91,7 +91,7 @@ def new_blog():
         return redirect(url_for('.index'))
 
     title = 'New Blog'
-    return render_template('newpitch.html',title = title,blog_form=blog_form )
+    return render_template('new_blog.html',title = title,blog_form=blog_form )
 
 
 @main.route('/blogs/blogs_fashion')
@@ -107,7 +107,7 @@ def blogs_food():
 
     blogs = Blog.get_blogs('food')
 
-    return render_template("product.html", blogs = blogs)
+    return render_template("food.html", blogs = blogs)
 
 @main.route('/blogs/blogs_travel')
 def blogs_travel():

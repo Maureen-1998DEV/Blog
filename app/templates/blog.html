@@ -12,9 +12,9 @@
     <div class="row">
         <h3>{{blog.blog_title}}</h3>
         <hr>
-        <p>{{blog.blog_content}}</p>
+        <p>{{blog.blog_text}}</p>
         <span>
-        <p>Posted on {{date}} by {{pitch.user.username| capitalize}}</p>
+        <p>Posted on {{date}} by {{blog.user.username| capitalize}}</p>
         <a href="/blog/{{blog.id}}?like=1">
             <i class="far fa-thumbs-up"></i>
         </a>{{blog.likes}} <a href="/blog/{{blog.id}}?dislike=1">
@@ -24,7 +24,7 @@
     </div>
     <div class="row">
         <h4>Comments</h4>
-        <hr>
+        <br>
         {% if current_user.is_authenticated %}
             {{ wtf.quick_form(comment_form) }}
         {%endif%}

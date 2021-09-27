@@ -1,18 +1,18 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, SelectField
-
+from wtforms.validators import Required
 class BlogForm(FlaskForm):
 
-    title = StringField('Blog title')
-    category= SelectField('Blog Category', choices=[('Select a category', 'Select a category'),('Music', 'Music'),('celebrites', 'celebriries'),('movie', 'movie'),('Fashion', 'Fashion'),('Travel', 'Travel'),('Food', 'Food'),('Personal', 'Personal'),('Fitness', 'Fitness'),('sports', 'sports')])
-    content = TextAreaField('The Blog...')
-    submit = SubmitField('Post')
+    title = StringField('BLOGmaster title',validators=[Required()])
+    text = TextAreaField('write your Blog',validators=[Required()])
+    category= SelectField('Blog Category', choices=[('Select a category', 'Select a category'),('Music', 'Music'),('celebrites', 'celebrities'),('movie', 'movie'),('Fashion', 'Fashion'),('Travel', 'Travel'),('Food', 'Food'),('Personal', 'Personal'),('Fitness', 'Fitness'),('sports', 'sports')])
+    submit = SubmitField('Blog')
 
 
 class CommentForm(FlaskForm):
 
-    comment = TextAreaField(' Comment blog')
-    submit = SubmitField('Submit')
+    text = TextAreaField(' Comment blog')
+    submit = SubmitField('Comment')
 
 
 class UpdateProfile(FlaskForm):
