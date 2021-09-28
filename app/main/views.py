@@ -186,7 +186,7 @@ def blog(id):
     if comment_form.validate_on_submit():
         comment= comment_form.text.data
 
-        new_comment = Comment(content_commit = comment,user = current_user,blog_id = blog)
+        new_comment = Comment(Comment = comment,user = current_user,blog_id = blog)
 
         new_comment.save_comment()
 
