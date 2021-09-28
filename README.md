@@ -78,7 +78,7 @@ python3.8 manage.py test
 ## Live Demo
 
 The web app can be accessed from the following link
-[click here]()
+[https://ougoblog.herokuapp.com/](click here)
 
 
 ## Technology used
